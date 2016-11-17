@@ -19,6 +19,7 @@
         </activity>
 
         <activity android:name=".FakeNewsActivity"/>
+        <activity android:name=".RSSActivity"/>
     </application>
 
 </manifest>

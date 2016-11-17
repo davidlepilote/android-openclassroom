@@ -23,12 +23,15 @@ public class RSSDownloader extends Thread {
 
     private final String link;
 
+    private final String channel;
+
     private final List<RSSAdapter.RSS> rssList;
 
     private final RSSAdapter rssAdapter;
 
-    public RSSDownloader(String link, List<RSSAdapter.RSS> rssList, RSSAdapter rssAdapter) {
-        this.link = link;
+    public RSSDownloader(RSSChannel channel, List<RSSAdapter.RSS> rssList, RSSAdapter rssAdapter) {
+        this.link = channel.link;
+        this.channel = channel.channel;
         this.rssList = rssList;
         this.rssAdapter = rssAdapter;
     }
@@ -50,7 +53,7 @@ public class RSSDownloader extends Thread {
                             NodeList rssLists = doc.getElementsByTagName("item");
                             for (int rssIndex = 0; rssIndex < rssLists.getLength(); rssIndex++) {
                                 Element rssItem = (Element) rssLists.item(rssIndex);
-                                rssList.add(new RSSAdapter.RSS(rssItem.getElementsByTagName("title").item(0).getTextContent(),
+                                rssList.add(new RSSAdapter.RSS(channel, rssItem.getElementsByTagName("title").item(0).getTextContent(),
                                         rssItem.getElementsByTagName("description").item(0).getTextContent(),
                                         rssItem.getElementsByTagName("enclosure").item(0).getAttributes().item(0).getTextContent()));
                             }

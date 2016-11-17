@@ -5,13 +5,16 @@ package com.monirapps.androidopenclassrooms;
  */
 
 public enum RSSChannel {
-    IDEES("http://www.lemonde.fr/idees/rss_full.xml"),
-    UNE("http://www.lemonde.fr/rss/une.xml"),
-    ACTU("http://www.lemonde.fr/m-actu/rss_full.xml");
+    IDEES("http://www.lemonde.fr/idees/rss_full.xml", "Idées"),
+    UNE("http://www.lemonde.fr/rss/une.xml", "A la une"),
+    ACTU("http://www.lemonde.fr/m-actu/rss_full.xml", "Actus");
 
     public final String link;
 
-    RSSChannel(String link) {
+    public final String channel;
+
+    RSSChannel(String link, String channel) {
         this.link = link;
+        this.channel = channel;
     }
 }

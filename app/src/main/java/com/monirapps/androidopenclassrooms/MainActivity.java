@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Fetch data from RSS channels
         for (RSSChannel rssChannel : RSSChannel.values()) {
-            new RSSDownloader(rssChannel.link, rssList, rssAdapter).start();
+            new RSSDownloader(rssChannel, rssList, rssAdapter).start();
         }
     }
 }
