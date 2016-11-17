@@ -13,7 +13,6 @@ import java.io.Serializable;
 public class RSSActivity extends AppCompatActivity {
 
     public static final String RSS = "rss";
-    public static final String LINK = "link";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

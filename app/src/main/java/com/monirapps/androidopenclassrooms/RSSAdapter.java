@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -35,7 +36,7 @@ public class RSSAdapter extends RecyclerView.Adapter<RSSAdapter.RSSViewHolder> {
         }
     }
 
-    public static class RSS implements Serializable{
+    public static class RSS implements Serializable, Comparable<RSS>{
         public final String channel;
         public final String title;
         public final String link;
@@ -46,6 +47,11 @@ public class RSSAdapter extends RecyclerView.Adapter<RSSAdapter.RSSViewHolder> {
             this.title = title;
             this.link = link;
             this.image = image;
+        }
+
+        @Override
+        public int compareTo(RSS other) {
+            return this.title.compareTo(other.title);
         }
     }
 

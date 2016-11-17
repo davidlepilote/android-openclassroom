@@ -1,5 +1,7 @@
 package com.monirapps.androidopenclassrooms;
 
+import android.support.v7.util.SortedList;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -10,6 +12,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -54,9 +57,10 @@ public class RSSDownloader extends Thread {
                             for (int rssIndex = 0; rssIndex < rssLists.getLength(); rssIndex++) {
                                 Element rssItem = (Element) rssLists.item(rssIndex);
                                 rssList.add(new RSSAdapter.RSS(channel, rssItem.getElementsByTagName("title").item(0).getTextContent(),
-                                        rssItem.getElementsByTagName("description").item(0).getTextContent(),
+                                        rssItem.getElementsByTagName("link").item(0).getTextContent(),
                                         rssItem.getElementsByTagName("enclosure").item(0).getAttributes().item(0).getTextContent()));
                             }
+                            Collections.sort(rssList);
                             rssAdapter.notifyDataSetChanged();
                         } catch (IOException | ParserConfigurationException | SAXException e) {
                             e.printStackTrace();
