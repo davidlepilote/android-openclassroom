@@ -12,6 +12,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,19 +26,31 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class RSSDownloader extends Thread {
 
+    // Callback called at the end of the thread if it has completed
+    public interface ThreadCompletedListener {
+        public void onCompleted();
+    }
+
+    private ThreadCompletedListener listener;
+
+    private final static SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss Z");
+
     private final String link;
 
     private final String channel;
 
     private final List<RSSAdapter.RSS> rssList;
 
-    private final RSSAdapter rssAdapter;
-
-    public RSSDownloader(RSSChannel channel, List<RSSAdapter.RSS> rssList, RSSAdapter rssAdapter) {
+    public RSSDownloader(RSSChannel channel, List<RSSAdapter.RSS> rssList) {
         this.link = channel.link;
         this.channel = channel.channel;
         this.rssList = rssList;
-        this.rssAdapter = rssAdapter;
+    }
+
+    // Returns this to use a Builder pattern when instantiated
+    public RSSDownloader onComplete(ThreadCompletedListener listener) {
+        this.listener = listener;
+        return this;
     }
 
     @Override
@@ -58,11 +72,14 @@ public class RSSDownloader extends Thread {
                                 Element rssItem = (Element) rssLists.item(rssIndex);
                                 rssList.add(new RSSAdapter.RSS(channel, rssItem.getElementsByTagName("title").item(0).getTextContent(),
                                         rssItem.getElementsByTagName("link").item(0).getTextContent(),
+                                        dateFormat.parse(rssItem.getElementsByTagName("pubDate").item(0).getTextContent()),
                                         rssItem.getElementsByTagName("enclosure").item(0).getAttributes().item(0).getTextContent()));
                             }
                             Collections.sort(rssList);
-                            rssAdapter.notifyDataSetChanged();
-                        } catch (IOException | ParserConfigurationException | SAXException e) {
+                            if (listener != null) {
+                                listener.onCompleted();
+                            }
+                        } catch (IOException | ParserConfigurationException | SAXException | ParseException e) {
                             e.printStackTrace();
                         }
                     }

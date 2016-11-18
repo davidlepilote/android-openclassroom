@@ -5,8 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
 
-import java.io.Serializable;
-
 /**
  * Created by David et Monireh on 11/11/2016.
  */
@@ -17,7 +15,7 @@ public class RSSActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fakenews);
+        setContentView(R.layout.activity_rss);
         Bundle extras = getIntent().getExtras();
         RSSAdapter.RSS rss = (RSSAdapter.RSS) extras.getSerializable(RSS);
         WebView webView = (WebView) findViewById(R.id.webView);

@@ -18,7 +18,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".FakeNewsActivity"/>
         <activity android:name=".RSSActivity"/>
     </application>
 

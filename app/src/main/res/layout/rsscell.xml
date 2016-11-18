@@ -4,8 +4,8 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
+    android:layout_marginTop="5dp"
     android:orientation="horizontal"
     tools:context="com.monirapps.androidopenclassrooms.MainActivity">
 
@@ -13,32 +13,46 @@
         android:id="@+id/image"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:scaleType="centerCrop"
-        />
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_gravity="center"
-        android:textSize="13dp"
-        android:textColor="@color/black"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_weight="1"
         android:ellipsize="end"
         android:lines="2"
-        tools:text="Titre du Monde"
-        />
+        android:textColor="@color/black"
+        android:textSize="13dp"
+        tools:text="Titre du Monde" />
 
-    <TextView
-        android:id="@+id/channel"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textAllCaps="true"
-        android:textSize="10dp"
-        android:textColor="@color/black"
-        tools:text="ACTUS"
-        />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/channel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="10dp"
+            tools:text="ACTUS" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:textSize="10dp"
+            tools:text="ACTUS" />
+
+    </LinearLayout>
 </LinearLayout>
